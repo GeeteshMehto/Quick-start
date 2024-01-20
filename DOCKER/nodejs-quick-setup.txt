@@ -1,0 +1,106 @@
+Make "Dockerfile" without extension
+
+Start writing in this file:-
+
+FROM ubuntu              (choosing base image)
+
+//Install Node.js on Ubuntu
+
+
+RUN apt-get update
+
+RUN apt-get install -y curl
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+
+RUN apt-get upgrade -y
+
+RUN apt-get install -y nodejs
+
+
+//copy your code in this image
+
+//COPY src des
+
+COPY package.json package.json
+
+COPY package-lock.json package-lock.json
+
+COPY main.js main.js
+
+
+RUN npm install
+
+
+ENTRYPOINT ["node", "main.js"]
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+Dockerfile code:-
+
+
+
+FROM ubuntu
+RUN apt-get update
+
+RUN apt-get install -y curl
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+
+RUN apt-get upgrade -y
+
+RUN apt-get install -y nodejs
+COPY package.json package.json
+
+COPY package-lock.json package-lock.json
+
+COPY main.js main.js
+
+
+RUN npm install
+
+
+ENTRYPOINT ["node", "main.js"]
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Or 
+Dockerfile code:-
+
+FROM node
+
+COPY package.json package.json
+
+COPY package-lock.json package-lock.json
+
+COPY main.js main.js
+
+
+RUN npm install
+
+
+ENTRYPOINT ["node", "main.js"]
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+Now we have to right command in terminal 
+
+//docker build -t <name-of-image> <path of Dockerfile>(. means Dockerfile file exist in same folder)
+docker build -t nodesjs-tut-docker .
+
+
+
+
+
+
+
+
