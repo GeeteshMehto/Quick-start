@@ -1,0 +1,61 @@
+When you want to use multiple container you use .yml file
+
+
+
+---------------------------------------------------------------------------------
+Syntax:-
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+  redis:
+    image: "redis:alpine"
+
+
+
+
+
+
+-----------------------------------------------------------------------------------
+Actual yml file
+docker-compose.yml
+
+
+
+version: '3.8'
+
+services:
+        postgres:
+            image: postgres
+            ports:
+                - "8000:5000"
+
+            environment:
+                USER : postgres
+                DB : review
+                PASSWORD : PASSWORD
+
+        redis:
+            image: redis
+            ports: 
+                - "6379:6379"
+
+
+
+
+
+----------------------------------------------------
+
+After this come to terminal
+
+docker compose up
+or
+sudo docker compose up
+
+
+
+Then to down it you can use
+
+docker compose down
