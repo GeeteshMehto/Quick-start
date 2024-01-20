@@ -52,17 +52,25 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
 RUN apt-get upgrade -y
 
 RUN apt-get install -y nodejs
-COPY package.json package.json
+COPY package.json /app/package.json (make folder app and copy inside the app in container)
 
-COPY package-lock.json package-lock.json
+COPY package-lock.json /app/package-lock.json (make folder app and copy inside the app in container)
 
 RUN npm install
 
-COPY main.js main.js
+COPY main.js main.js      or  COPY . .    (to copy all file)(use .dockerignore to ignore some files)
 
 
 ENTRYPOINT ["node", "main.js"]
 
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+.dockerignore
+
+node_modules/
 
 
 -----------------------------------------------------------------------------------------------------------------------
@@ -72,9 +80,9 @@ Dockerfile code:-
 
 FROM node
 
-COPY package.json package.json
+COPY package.json /app/package.json
 
-COPY package-lock.json package-lock.json
+COPY package-lock.json /app/package-lock.json
 
 COPY main.js main.js
 
