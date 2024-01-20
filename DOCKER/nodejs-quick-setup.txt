@@ -1,4 +1,4 @@
-Make "Dockerfile" without extension
+Make "Dockerfile" without extension this is single stage build
 
 Start writing in this file:-
 

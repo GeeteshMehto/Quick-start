@@ -1,0 +1,40 @@
+Dockerfile code:-
+
+
+
+FROM ubuntu as build
+RUN apt-get update
+
+RUN apt-get install -y curl
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+
+RUN apt-get upgrade -y
+
+RUN apt-get install -y nodejs
+
+
+WORKDIR /app  (code below this will go in app folder)
+
+
+
+
+COPY package.json package.json 
+
+COPY package-lock.json package-lock.json 
+
+
+RUN npm install
+
+COPY main.js main.js      or  COPY . .    (to copy all file)(use .dockerignore to ignore some files)
+
+
+
+
+
+FROM ubuntu as runner
+
+WORKDIR app/
+copy --from=build app/
+
+ENTRYPOINT ["node", "main.js"]
