@@ -2,6 +2,7 @@
 #include <cmath>
 using namespace std;
 
+
 class Node
 {
 public:
